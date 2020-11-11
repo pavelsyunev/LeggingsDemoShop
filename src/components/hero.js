@@ -21,8 +21,6 @@ const Hero = ({ title, description }) => {
     }
   `)
 
-  console.log(window.innerWidth)
-
   return window.innerWidth >= 500 ? (
     <BackgroundImage
       className="mb-6 py-32 bg-contain bg-no-repeat bg-left flex flex-col justify-center items-center rounded overflow-hidden shadow-lg"
