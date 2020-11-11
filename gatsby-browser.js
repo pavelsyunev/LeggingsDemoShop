@@ -6,7 +6,3 @@
 
 // You can delete this file if you're not using it
 import "./src/styles/tailwind.css"
-
-const windowWidth = window.innerWidth
-
-export default windowWidth

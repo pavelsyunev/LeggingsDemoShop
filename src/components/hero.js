@@ -1,9 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import { isMobile } from "react-device-detect"
 
 import BackgroundImage from "gatsby-background-image"
-import WindowWidth from "../../gatsby-browser"
 
 const Hero = ({ title, description }) => {
   const {
@@ -22,7 +22,7 @@ const Hero = ({ title, description }) => {
     }
   `)
 
-  return WindowWidth >= 500 ? (
+  return isMobile ? (
     <BackgroundImage
       className="mb-6 py-32 bg-contain bg-no-repeat bg-left flex flex-col justify-center items-center rounded overflow-hidden shadow-lg"
       fluid={heroImage}
