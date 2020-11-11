@@ -20,7 +20,7 @@ const About = () => {
   return (
     <Layout>
       <SEO title="About leggings shop New York Gatsby Shopify" />
-      <div className="m-4 max-w-sm rounded overflow-hidden shadow-lg">
+      <div className="grid md:grid-cols-2 m-4  rounded overflow-hidden shadow-lg">
         <Img fluid={data.placeholderImage.childImageSharp.fluid} />
         <div className="px-6 py-2">
           <div className="font-bold text-base mb-2">Hey there!</div>

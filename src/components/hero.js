@@ -1,11 +1,12 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import { isMobile } from "react-device-detect"
 
 import BackgroundImage from "gatsby-background-image"
 
 const Hero = ({ title, description }) => {
+  const [windowWidth, setWindowWidth] = useState(0)
+
   const {
     heroImage: {
       childImageSharp: { fluid: heroImage },
@@ -22,7 +23,11 @@ const Hero = ({ title, description }) => {
     }
   `)
 
-  return isMobile ? (
+  useEffect(() => {
+    setWindowWidth(window.innerWidth)
+  }, [windowWidth])
+
+  return windowWidth >= 500 ? (
     <BackgroundImage
       className="mb-6 py-32 bg-contain bg-no-repeat bg-left flex flex-col justify-center items-center rounded overflow-hidden shadow-lg"
       fluid={heroImage}
