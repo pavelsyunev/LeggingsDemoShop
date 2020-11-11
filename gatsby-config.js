@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Leggings Demo Shop`,
+    description: `Gatsby with Shopify demo leggins shop.`,
+    author: `paul.deepov@gmail.com`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -27,8 +27,47 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: "gatsby-background-image-es5",
+      options: {
+        // add your own characters to escape, replacing the default ':/'
+        specialChars: "/:",
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-theme-shopify-manager`,
+      options: {
+        shopName: "thelavanderstore",
+        accessToken: "62f4af08e28ca266dbdc0933d6402e51",
+      },
+    },
+    // {
+    //   resolve: "gatsby-source-shopify",
+    //   options: {
+    //     shopName: "thelavanderstore",
+    //     accessToken: "62f4af08e28ca266dbdc0933d6402e51",
+    //     apiVersion: "2020-10",
+    //   },
+    // },
+    {
+      resolve: `gatsby-plugin-postcss`,
+      options: {
+        postCssPlugins: [require("tailwindcss"), require("autoprefixer")],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-purgecss`,
+      options: {
+        printRejected: false, // Print removed selectors and processed file names
+        develop: false, // Enable while using `gatsby develop`
+        tailwind: true, // Enable tailwindcss support
+        // whitelist: ['whitelist'], // Don't remove this selector
+        // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
+        // purgeOnly : ['components/', '/main.css', 'bootstrap/'], // Purge only these files/folders
+      },
+    },
   ],
 }

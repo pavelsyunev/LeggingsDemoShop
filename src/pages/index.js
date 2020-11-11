@@ -1,22 +1,57 @@
 import React from "react"
-import { Link } from "gatsby"
-
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+import Hero from "../components/hero"
+import Tile from "../components/tile"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
-)
+const IndexPage = ({ data }) => {
+  const {
+    allShopifyProduct: { nodes: products },
+  } = data
+
+  return (
+    <Layout>
+      <SEO title="Leggings shop New York" />
+      <Hero />
+      <div className="font-sans grid grid-cols-1 text-center md:grid-cols-3 gap-4 mt-2">
+        {products.map(product => (
+          <Tile
+            key={product.handle}
+            slug={product.handle}
+            title={product.title}
+            price={Number(product.priceRange.maxVariantPrice.amount)}
+            image={product.images[0].localFile.childImageSharp.fluid}
+          />
+        ))}
+      </div>
+    </Layout>
+  )
+}
 
 export default IndexPage
+
+export const IndexPageQuery = graphql`
+  query allProducts {
+    allShopifyProduct {
+      nodes {
+        title
+        handle
+        images {
+          localFile {
+            childImageSharp {
+              fluid(maxWidth: 600) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+        }
+        priceRange {
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+      }
+    }
+  }
+`
